@@ -1,3 +1,5 @@
+using APBD_5.Animals;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IAnimalRepository, AnimalRespository>();
+builder.Services.AddScoped<IAnimalService, AnimalService>();
 
 builder.Services.AddControllers();
 var app = builder.Build();
