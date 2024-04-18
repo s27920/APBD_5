@@ -38,7 +38,6 @@ public class AnimalRespository : IAnimalRepository
                 Area = reader["Area"].ToString()!
             };
             animals.Add(animal);
-
         }
 
         return animals;
