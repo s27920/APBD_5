@@ -1,8 +1,7 @@
-using System.Data.SqlClient;
+
+using Microsoft.Data.SqlClient;
 
 namespace APBD_5.Animals;
-
-
 
 public interface IAnimalRepository
 {
@@ -26,11 +25,23 @@ public class AnimalRespository : IAnimalRepository
         using var connection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
         connection.Open();
         
+        var validatedOrderBy =
+        
     }
 
     public bool AddAnimal(CreateAnimalDTO dto)
     {
-        throw new NotImplementedException();
+        using var connection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
+        connection.Open();
+        string name = dto.Name;
+        string desc = dto.Description;
+        string cat = dto.Category;
+        string area = dto.Area;
+        using var com = new SqlCommand("INSERT INTO Animals (Name, Description, Category, Area) VALUES (@name, @desc, @cat, @area)");
+        com.Parameters.AddWithValue("@name", name);
+        com.Parameters.AddWithValue("@desc", desc);
+        com.Parameters.AddWithValue("@cat", cat);
+        com.Parameters.AddWithValue("@area", area);
     }
 
     public bool RemoveAnimal(DeleteAnimalDTO dto)
